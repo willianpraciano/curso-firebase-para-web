@@ -79,7 +79,16 @@ function deletar(id) {
  * @param {String} id Id do card
  */
 function curtir(id) {
+    var card = document.getElementById(id);
+    var count = card.getElementsByClassName('count-number')[0];
+    var countNumber = +count.innerText; //o "+" Converte para um número sem precisar usar o Number()
+    countNumber = countNumber + 1;
 
+    //.set(): Pode ser pacessado diretamente o objeto que a ser atualizado settando o valor atualizado
+    //ou pode se passar o objeto completo e atualiza-lo com os novos valores nos campos correspondentes
+    ref.child(id + '/curtidas').set(countNumber).then(()=>{
+        count.innerText = countNumber;
+    });
 };
 
 /**
@@ -87,7 +96,17 @@ function curtir(id) {
  * @param {String} id Id do card
  */
 function descurtir(id) {
+    var card = document.getElementById(id);
+    var count = card.getElementsByClassName('count-number')[0];
+    var countNumber = +count.innerText; //o "+" Converte para um número sem precisar usar o Number()
+    if(countNumber>0){ //curtidas não podem ser negativas
+        countNumber = countNumber - 1;
 
+        //.update({}): recebe um objeto, e apenas um objeto, e atualiza as propriedades desse objeto
+        ref.child(id).update({curtidas: countNumber}).then(()=>{
+            count.innerText = countNumber;
+        });
+    }
 };
 
 /**
