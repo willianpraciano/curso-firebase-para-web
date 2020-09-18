@@ -47,8 +47,8 @@ function criarCard() {
      * push(): cria um nó com id unico e insere os dados dentro desse uid
      */
     //Usando o push() para criar um filho com id unico 
-    ref.push(card).then(()=>{
-        adicionaCardATela(card);
+    ref.push(card).then(snapshot =>{
+        adicionaCardATela(card, snapshot.key);
     });
 
 
@@ -60,7 +60,18 @@ function criarCard() {
  * @param {String} id Id do card
  */
 function deletar(id) {
+    var card = document.getElementById(id);
     
+    //.remove(): remove o nó selecionado, além de remover também todos os nós dentro dele
+    ref.child(id).remove().then(()=>{
+        //remove da tela
+        card.remove();
+    });
+
+    /*
+    //set(null): Ao settar um nó em nulo, exclui esse nó do firebase
+    ref.child(id).set(null).then(()=>{card.remove()});
+    */
 };
 
 /**
@@ -110,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log('chave', snapshot.key);
 
         snapshot.forEach(value => {
-            adicionaCardATela(value.val());
+            adicionaCardATela(value.val(), value.key);
         });
     });
 });
