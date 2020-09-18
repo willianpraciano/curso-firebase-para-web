@@ -5,10 +5,54 @@ var CARD_CONTAINER = document.getElementsByClassName('card-container')[0];
 var NOMES = ["Anderson", "Beatriz", "Caio", "Daniela", "Everton", "Fabiana", "Gabriel", "Hortencia", "Igor", "Joana"];
 
 /**
+ * firabase: objeto global
+ * database(): metodo para acesso ao Realtime Database
+ * ref(): url em string para referencia do caminho do banco
+ */
+var ref = firebase.database().ref('card/');
+
+/**
  * Botão para cria um card no card-contaier
  */
 function criarCard() {
+    var card = {
+        nome: NOMES[Math.floor( Math.random() * (NOMES.length - 1) )],
+        idade: Math.floor(Math.random()* (40-18) + 18), //idade entre 18 e 40
+        curtidas: 0,
+    };
+
+    /**
+     * firabase: objeto global
+     * database(): metodo para acesso ao Realtime Database
+     * ref(): url em string para referencia do caminho do banco
+     * set(): metodo que cria dados na url passada 
+     * child(): Acessa o nó filho passado por parametro
+     */
     
+    /*
+    //Acessando o nó pelo caminho completo
+    firebase.database().ref('card/'+ card.nome ).set(card).then(()=>{
+       adicionaCardATela(card);
+    });
+    */
+
+    /*
+    //Criando um filho no nó de referencia previamente declarado
+    ref.child(card.nome).set(card).then(()=>{
+        adicionaCardATela(card);
+    });
+    */
+
+    /**
+     * push(): cria um nó com id unico e insere os dados dentro desse uid
+     */
+    //Usando o push() para criar um filho com id unico 
+    ref.push(card).then(()=>{
+        adicionaCardATela(card);
+    });
+
+
+
 };
 
 /**
@@ -39,7 +83,36 @@ function descurtir(id) {
  * Espera o evento de que a DOM está pronta para executar algo
  */
 document.addEventListener("DOMContentLoaded", function () {
-    
+    /**
+     * Once(): retorna os dados lidos de uma URL
+     * snapshot: objeto retornado pela leitura
+     */
+    ref.once('value').then(snapshot => {
+        console.log(snapshot.val());
+
+        //acessa um nó filho
+        console.log('child', snapshot.child('-MFzhJCagbsIfanpw9E3').val() );
+        
+        //checa se existe algo no snapshot
+        console.log('exists()', snapshot.exists() );
+
+        //checa se existe um filho passado na URL
+        console.log('hasChild() nome', snapshot.hasChild('-MFzhJCagbsIfanpw9E3/nome'));
+        console.log('hasChild() comentario', snapshot.hasChild('-MFzhJCagbsIfanpw9E3/comentario'));
+        
+        //Chega se existe algum filho no nó
+        console.log('hasChildren()', snapshot.child('-MFzhJCagbsIfanpw9E3').hasChildren());
+        
+        //Retorna o número de Filhos no snapshot
+        console.log('numChildren()', snapshot.numChildren());
+
+        //Retorna a chave desse snapshot/caminho
+        console.log('chave', snapshot.key);
+
+        snapshot.forEach(value => {
+            adicionaCardATela(value.val());
+        });
+    });
 });
 
 /**
