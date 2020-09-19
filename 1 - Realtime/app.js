@@ -113,11 +113,12 @@ function descurtir(id) {
  * Espera o evento de que a DOM está pronta para executar algo
  */
 document.addEventListener("DOMContentLoaded", function () {
+    
     /**
      * Once(): retorna os dados lidos de uma URL
      * snapshot: objeto retornado pela leitura
      */
-    ref.once('value').then(snapshot => {
+     ref.once('value').then(snapshot => {
         console.log(snapshot.val());
 
         //acessa um nó filho
@@ -142,7 +143,66 @@ document.addEventListener("DOMContentLoaded", function () {
         snapshot.forEach(value => {
             adicionaCardATela(value.val(), value.key);
         });
+
     });
+    
+
+
+
+
+    /**
+     * ref.on('value', ()=>{}); : Monitora constantemente todos as mudanças e o 
+     * snapshot trás SEMPRE todos os dados.
+     */
+    /*
+    ref.on('value', snapshot =>{
+        snapshot.forEach(value => {
+            adicionaCardATela(value.val(), value.key);
+        });
+    });
+    */
+
+    /**
+     * ref.on ('child_added, ()=>{}); - na primeira vez que é executado ele puxa 
+     * todos os dados da refeência, porém, um nó por vez. Depois disso, é criado um
+     * observável que para cada novo item inserido, que dispara e pega apenas este
+     * novo ítem, assim, ele não pega todos os dados novamente.
+     * 
+     * Obs.: Não monitora alteração, remoção ou outros eventos. Ele apenas monitora
+     * a adicção de um nó que seja FILHO IMEDIATO da referência, ou seja, ela também
+     * não monitora nós dentro de nós que são adicionados
+     */
+    /*    
+   ref.on('child_added', snapshot => {
+       adicionaCardATela(snapshot.val(), snapshot.key);
+   });
+   */
+
+   /**
+    * ref.on('child_changed', ()=>{}); - monitoa qualquer mudança em um nó filho
+    * seja adição. exclusão ou alteração de alguma propriedade.
+    * 
+    * Obs.: No callback, além do snapshot, é possível utilizar um 'uid' que é a 
+    * chavedo nó filho da referência que está antes do nó alterado.Se não houver
+    * um nó anterior ele devolve null
+    */
+   /*
+   ref.on('child_changed', (snapshot, uid)=> {
+       console.log(snapshot.key, uid);
+   });
+   */
+
+
+   /**
+    * ref.on('child_removed', ()=>{}); - Este metodo é disparado se algum nó
+    * FILHO IMEDIATO da referência é removido.
+    */
+   /*
+   ref.on('child_removed', snapshot => {
+       console.log('removed', snapshot.key);
+   });
+   */
+
 });
 
 /**
