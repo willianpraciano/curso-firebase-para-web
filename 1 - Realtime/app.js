@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
      * Once(): retorna os dados lidos de uma URL
      * snapshot: objeto retornado pela leitura
      */
+    
      ref.once('value').then(snapshot => {
         console.log(snapshot.val());
 
@@ -147,8 +148,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
 
-
-
+    //=================================//
+    //======TRABALHANDO COM .on()======//
+    //=================================//
 
     /**
      * ref.on('value', ()=>{}); : Monitora constantemente todos as mudanças e o 
@@ -202,6 +204,47 @@ document.addEventListener("DOMContentLoaded", function () {
        console.log('removed', snapshot.key);
    });
    */
+
+   
+   //=================================//
+   //======ORDENAÇÃO COM O .on()======//
+   //=================================//
+
+   //A ordenação deve ser feita depois da referencia e anres do metodos de leitura (.on())
+   //A ordenação só funciona com o método .on()
+   //ATENÇÂO!!! Só é possível usar um método de ordenação por vez
+
+   /**
+    * .orderByChild('filho') - ordena pela propriedade filho passado como parametro
+    */
+   /*
+   ref.orderByChild('idade').on('child_added', snapshot => {
+        adicionaCardATela(snapshot.val(), snapshot.key);
+   });
+   */
+
+   /**
+    * .orderByKey() - ordena pelo id, como as keys automaticas usam o datetime
+    * para serem criados, os elementos no Firebase já são ordenados assim por padrão,
+    * mas se você mesmo estiver criando os ids(keys) então este ordenamento terá efeito
+    */
+   /*
+   ref.orderByKey().on('child_added', snapshot => {
+        adicionaCardATela(snapshot.val(), snapshot.key);
+    });
+    */
+
+    /**
+    * .orderByValue() - ordena pelo valor de cada propriedade dentro do nó, não
+    * vale para nós que tenham como filhos outros nós
+    */
+   /*
+   ref.child('-MHcdroiHrIBSb_zSdej').orderByValue().on('child_added', snapshot => {
+        adicionaCardATela(snapshot.val(), snapshot.key);
+    });
+    */
+
+
 
 });
 
