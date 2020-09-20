@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
      * Once(): retorna os dados lidos de uma URL
      * snapshot: objeto retornado pela leitura
      */
-    
+    /*
      ref.once('value').then(snapshot => {
         console.log(snapshot.val());
 
@@ -146,6 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     });
+    */
     
 
     //=================================//
@@ -243,6 +244,28 @@ document.addEventListener("DOMContentLoaded", function () {
         adicionaCardATela(snapshot.val(), snapshot.key);
     });
     */
+
+
+    //=================================//
+    //====== FILTRANDO O RETORNO ======//
+    //=================================//
+    
+    /**
+     * .starAt(): trás todos os nós começando a partir do nó passado na query
+     * .endAt():  trás valores desde o inicio da query até o valor passado com parâmetro (que vai ser o ultimo).
+     * .equalTo(): trás apenas os vilhos cujos valores são iguais ao valor passado como parâmetro
+     */
+    //Vai trazer os filhos com idade de 25 até 35 anos
+    /*
+    ref.orderByChild('idade').startAt(25).endAt(35).on('child_added', snapshot => {
+        adicionaCardATela(snapshot.val(), snapshot.key);
+    });
+    */
+   
+    //Vai trazer os filhos com idade igual a 32 anos
+    ref.orderByChild('idade').equalTo(32).on('child_added', snapshot => {
+        adicionaCardATela(snapshot.val(), snapshot.key);
+    });
 
 
 
