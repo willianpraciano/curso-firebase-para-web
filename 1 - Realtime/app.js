@@ -147,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
     */
-    
 
     //=================================//
     //======TRABALHANDO COM .on()======//
@@ -263,10 +262,29 @@ document.addEventListener("DOMContentLoaded", function () {
     */
    
     //Vai trazer os filhos com idade igual a 32 anos
+    /*
     ref.orderByChild('idade').equalTo(32).on('child_added', snapshot => {
         adicionaCardATela(snapshot.val(), snapshot.key);
     });
+    */
 
+
+
+    //=================================//
+    //======= Limitando Retorno =======//
+    //=================================//
+
+    /*
+    //Trás apenas os 3 primeiros valores
+    ref.orderByChild('idade').limitToFirst(3).on('child_added', snapshot => {
+        adicionaCardATela(snapshot.val(), snapshot.key);
+    });
+    */
+
+    //Trás apenas os 3 ultimos valores (não é necessário ter uma ordenação)
+   ref.limitToLast(3).on('child_added', snapshot => {
+        adicionaCardATela(snapshot.val(), snapshot.key);
+    });
 
 
 });
