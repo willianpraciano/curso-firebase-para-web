@@ -48,7 +48,7 @@ function criarCard() {
      */
     //Usando o push() para criar um filho com id unico 
     ref.push(card).then(snapshot =>{
-        adicionaCardATela(card, snapshot.key);
+        //adicionaCardATela(card, snapshot.key);
     });
 
 
@@ -147,6 +147,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
     */
+
+
 
     //=================================//
     //======TRABALHANDO COM .on()======//
@@ -281,10 +283,25 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     */
 
+    /*
     //Trás apenas os 3 ultimos valores (não é necessário ter uma ordenação)
-   ref.limitToLast(3).on('child_added', snapshot => {
+    ref.limitToLast(3).on('child_added', snapshot => {
         adicionaCardATela(snapshot.val(), snapshot.key);
     });
+    */
+
+
+    //=================================//
+    //====== Removendo Listening ======//
+    //=================================//
+    ref.on('value', snapshot =>{
+        snapshot.forEach(value => {
+            adicionaCardATela(value.val(), value.key);
+        });
+        ref.off(); //removendo listening
+    });
+
+
 
 
 });
