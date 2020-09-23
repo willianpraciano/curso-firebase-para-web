@@ -48,7 +48,7 @@ function criarCard() {
      */
     //Usando o push() para criar um filho com id unico 
     ref.push(card).then(snapshot =>{
-        //adicionaCardATela(card, snapshot.key);
+        adicionaCardATela(card, snapshot.key);
     });
 
 
@@ -113,12 +113,16 @@ function descurtir(id) {
  * Espera o evento de que a DOM está pronta para executar algo
  */
 document.addEventListener("DOMContentLoaded", function () {
+
+    firebase.database.enableLogging(function(message){
+        console.log('[Firebase]', message);
+    });
+
     
     /**
      * Once(): retorna os dados lidos de uma URL
      * snapshot: objeto retornado pela leitura
      */
-    /*
      ref.once('value').then(snapshot => {
         console.log(snapshot.val());
 
@@ -146,7 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     });
-    */
 
 
 
@@ -294,12 +297,15 @@ document.addEventListener("DOMContentLoaded", function () {
     //=================================//
     //====== Removendo Listening ======//
     //=================================//
+    /*
     ref.on('value', snapshot =>{
         snapshot.forEach(value => {
             adicionaCardATela(value.val(), value.key);
         });
         ref.off(); //removendo listening
+        //ref.off('value');
     });
+    */
 
 
 
