@@ -50,7 +50,18 @@ function criarCard() {
     ref.push(card).then(snapshot =>{
         adicionaCardATela(card, snapshot.key);
     });
-
+    
+   
+    /**
+     * USANDO FETCH PARA CRIA UM CARD NO FIREBASE
+     */
+    /*
+    fetch('https://cursofirebase-73142.firebaseio.com/card.json', {
+        body: JSON.stringify(card),
+        method: 'POST',
+        mode: 'no-cors'
+    }).catch(err=>console.log('Erro ao adicionar a tela: ', err));
+    */
 
 
 };
@@ -129,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
      * Once(): retorna os dados lidos de uma URL
      * snapshot: objeto retornado pela leitura
      */
+    /*
      ref.once('value').then(snapshot => {
         console.log(snapshot.val());
 
@@ -156,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     });
+    */
 
 
 
@@ -315,9 +328,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     */
 
-
-
-
+    //=================================//
+    //==== Buscando dados via HTTP ====//
+    //=================================//
+    /**
+     * Fetch:é uma implementação para requisições http
+     *  Para fazer uma chamada para o firebase basta saber a rota e colocar .json no final
+     */
+    fetch('https://cursofirebase-73142.firebaseio.com/card.json')
+        .then(res => res.json())
+        .then(res =>{
+            for(var key in res){
+                adicionaCardATela(res[key], key);
+            }
+        });
 });
 
 /**
