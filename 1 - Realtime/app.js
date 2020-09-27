@@ -88,6 +88,8 @@ function curtir(id) {
     //ou pode se passar o objeto completo e atualiza-lo com os novos valores nos campos correspondentes
     ref.child(id + '/curtidas').set(countNumber).then(()=>{
         count.innerText = countNumber;
+    }, err=>{
+        console.log('Erro ao curtir', err);
     });
 };
 
@@ -105,6 +107,8 @@ function descurtir(id) {
         //.update({}): recebe um objeto, e apenas um objeto, e atualiza as propriedades desse objeto
         ref.child(id).update({curtidas: countNumber}).then(()=>{
             count.innerText = countNumber;
+        }).catch((err)=>{
+            console.log('Erro ao descurtir', err);
         });
     }
 };
@@ -114,10 +118,12 @@ function descurtir(id) {
  */
 document.addEventListener("DOMContentLoaded", function () {
 
+    /*
+    //Loging do status das chmadas do Firebase
     firebase.database.enableLogging(function(message){
         console.log('[Firebase]', message);
     });
-
+    */
     
     /**
      * Once(): retorna os dados lidos de uma URL
@@ -304,6 +310,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         ref.off(); //removendo listening
         //ref.off('value');
+    }, err=>{
+        console.log('Erro no on', err);
     });
     */
 
