@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
        * Mudando o idioma do firebase no SDK de Autenticação
        * Para enviar o email de confirmação em PT-BR
        */
+      /*
       firebase.auth().languageCode = 'pt';
       //firebase.auth().useDeviceLanguage();
       if(!usuario.emailVerified){
@@ -53,13 +54,16 @@ document.addEventListener("DOMContentLoaded", function () {
           alert('email de verificação enviado');
         });
       }
+      */
 
       /**
        * Envia um email para mudança de senha ao email passado por parametro
        */
+      /*
       firebase.auth().sendPasswordResetEmail(usuario.email).then(()=>{
         alert('Email para reset de senha enviado');
       });
+      */
 
     }else{
       console.log('Não há usuario logado!');
