@@ -29,7 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
       firebase.auth.FacebookAuthProvider.PROVIDER_ID,
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.GithubAuthProvider.PROVIDER_ID
+      firebase.auth.GithubAuthProvider.PROVIDER_ID,
+      {
+        provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+        defaultCountry: 'BR'
+      }
     ],
     signInFlow: 'popup'
   };
