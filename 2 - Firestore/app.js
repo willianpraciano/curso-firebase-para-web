@@ -15,16 +15,27 @@ function criarCard() {
     };
 
     /**
-     * collection(''): Seleciona a coleção, como se fosse um fichario, onde os 
-     *                  documentos são guardados
-     * doc(''): seleciona o documento a ser criado ou acessado
-     * set(): Cria o documento se ele não existe, se ele já existe sobrescrece 
-     *          o documento
+     * collection('colecao'): Seleciona a coleção, como se fosse um fichario, 
+     *                        onde os documentos são guardados
+     * doc('documento'): seleciona o documento a ser criado ou acessado
+     * set(dados): Cria o documento passado como parâmetro se ele ainda não 
+     *              existe, se ele já existe sobrescreve o documento
      */
+    /*
     firebase.firestore().collection('cards').doc('1').set(card).then(()=>{
         console.log('Dados salvos');
         adicionaCardATela(card, 1);
     });
+    */
+
+    /**
+     * .add({dados}): adiciona os dados dentro de um UID gerado automaticamente
+     */
+    firebase.firestore().collection('cards').add(card).then(()=>{
+        console.log('Dados salvos');
+        adicionaCardATela(card);
+    });
+
 
 
 };
