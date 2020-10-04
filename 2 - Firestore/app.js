@@ -8,7 +8,25 @@ var NOMES = ["Anderson", "Beatriz", "Caio", "Daniela", "Everton", "Fabiana", "Ga
  * Botão para cria um card no card-contaier
  */
 function criarCard() {
-    
+    var card = {
+        nome: NOMES[Math.floor( Math.random() * (NOMES.length - 1) )],
+        idade: Math.floor(Math.random()* (40-18) + 18), //idade entre 18 e 40
+        curtidas: 0,
+    };
+
+    /**
+     * collection(''): Seleciona a coleção, como se fosse um fichario, onde os 
+     *                  documentos são guardados
+     * doc(''): seleciona o documento a ser criado ou acessado
+     * set(): Cria o documento se ele não existe, se ele já existe sobrescrece 
+     *          o documento
+     */
+    firebase.firestore().collection('cards').doc('1').set(card).then(()=>{
+        console.log('Dados salvos');
+        adicionaCardATela(card, 1);
+    });
+
+
 };
 
 /**
