@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cloud Firestore Database</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+
+    <main class="container-fluid">
+        <div class="text-center" data-name="add">
+            <button type="button" class="btn btn-primary" onclick="criarCard()">Adicionar Card</button>
+        </div>
+        <div class="card-container">
+
+        </div>
+    </main>
+
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-firestore.js"></script>
+    <!-- Inicializa o firebase -->
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDmFOEcBFfrnB7Os4Vmm4C-TGr4H5eSgAI",
+            authDomain: "cursofirebase-73142.firebaseapp.com",
+            databaseURL: "https://cursofirebase-73142.firebaseio.com",
+            projectId: "cursofirebase-73142",
+            storageBucket: "cursofirebase-73142.appspot.com",
+            messagingSenderId: "1068246595275",
+            appId: "1:1068246595275:web:f2997fe5a11a52f7794d4e",
+            measurementId: "G-PP6B0GTL2L"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+    </script>
+    <!-- Nosso app -->
+    <script src="./app.js"></script>
+</body>
+
+</html>
