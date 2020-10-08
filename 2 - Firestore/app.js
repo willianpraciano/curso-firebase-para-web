@@ -104,9 +104,31 @@ document.addEventListener("DOMContentLoaded", function () {
              */
 
             //console.log(card);
-            adicionaCardATela(card.data(), card.id);
+            //adicionaCardATela(card.data(), card.id);
         });
     });
+
+    /**
+     * .onSnapshot(): Observa mudanças em tempo real
+     */
+    
+    firebase.firestore().collection('cards').onSnapshot(snapshot =>{
+        snapshot.docChanges().forEach(card => {
+            if(card.type == 'added'){
+                adicionaCardATela(card.doc.data(), card.doc.id);
+            }
+
+            if(card.type == 'modified'){
+                console.log('modified');
+            }
+
+            if(card.type == 'removed'){
+                console.log('removed');
+            }
+        });
+    });
+
+
 });
 
 /**
