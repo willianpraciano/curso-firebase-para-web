@@ -33,7 +33,7 @@ function criarCard() {
      */
     firebase.firestore().collection('cards').add(card).then(()=>{
         console.log('Dados salvos');
-        adicionaCardATela(card);
+        //adicionaCardATela(card);
     });
 
 };
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /**
      * .onSnapshot(): Observa mudanças em tempo real
      */
-    /*
+    
     firebase.firestore().collection('cards').onSnapshot(snapshot =>{
         snapshot.docChanges().forEach(card => {
             if(card.type == 'added'){
@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
-    */
+    
 
     /**
      * CONSULTAS
@@ -246,13 +246,13 @@ document.addEventListener("DOMContentLoaded", function () {
      * GRAVAÇÃO EM LOTE
      * Para uma gravação em lote é necessário criar um batch,
      * esse batch serve para armazenar as operações que serão executadas,
-     * podendo ser executadas, com o batch, as operaões de set, update e delete.
+     * podendo ser executadas, com o batch, as operaões de set, update e remove.
      * Para criar uma operação de set, é necessário a areferencia do documento e os dados que se deseja inserir.
      * Ao criar todos os metodos é necessário executar o método .commit() para executar todas as operações.
      * 
      * Obs.: com o batch, ou são gravadas todas as operações, ou nenhuma é gravada. 
      */
-    
+    /*
     var batch = firebase.firestore().batch();
     var cards = [];
 
@@ -273,6 +273,7 @@ document.addEventListener("DOMContentLoaded", function () {
             adicionaCardATela(cards[i], i);   
         }
     });
+    */
 
 
 
