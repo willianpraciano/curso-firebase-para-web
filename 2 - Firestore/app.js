@@ -33,10 +33,8 @@ function criarCard() {
      */
     firebase.firestore().collection('cards').add(card).then(()=>{
         console.log('Dados salvos');
-        //adicionaCardATela(card);
+        adicionaCardATela(card);
     });
-
-
 
 };
 
@@ -155,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /**
      * .onSnapshot(): Observa mudanças em tempo real
      */
-    
+    /*
     firebase.firestore().collection('cards').onSnapshot(snapshot =>{
         snapshot.docChanges().forEach(card => {
             if(card.type == 'added'){
@@ -171,6 +169,22 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+    */
+
+    /**
+     * CONSULTAS
+     */
+
+    /**
+     * .WHERE('campo', 'operador', 'valor') - Retorna dados que obedecem a condição passada
+     * Obs.: Não aceita ||(OR), &&(AND) e !=(Diferente)
+     */
+    firebase.firestore().collection('cards').where('idade', '>', 25).get().then(snapshot => {
+        snapshot.docs.forEach(card =>{
+            adicionaCardATela(card.data(), card.id);
+        });
+    });
+    
 
 
 });
