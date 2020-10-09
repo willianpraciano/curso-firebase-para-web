@@ -33,7 +33,7 @@ function criarCard() {
      */
     firebase.firestore().collection('cards').add(card).then(()=>{
         console.log('Dados salvos');
-        adicionaCardATela(card);
+        //adicionaCardATela(card);
     });
 
 
@@ -45,7 +45,28 @@ function criarCard() {
  * @param {String} id Id do card
  */
 function deletar(id) {
-    
+    var card = document.getElementById(id);
+
+    /**
+     * .delete() - Apaga o documento da coleção.
+     * Obs.: Pode ser usado apenas em documentos.
+     */
+    firebase.firestore().collection('cards').doc(id).delete().then(()=>{
+        card.remove();
+    });
+
+    /**
+     * Para remover uma propriedade dp documento podemos dar .update()
+     * passando como parâmetro a propriedade que será excluída e chamando
+     * o método de .delete() ido de firebase.firestore.fieldValue
+     */
+    /*
+    firebase.firestore().collection('cards').doc(id).update({curtidas: firebase.firestore.FieldValue.delete()})
+        .then(()=>{
+            console.log('Removido curtidas');
+        });
+    */
+
 };
 
 /**
