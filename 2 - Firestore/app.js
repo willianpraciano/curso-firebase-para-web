@@ -203,13 +203,43 @@ document.addEventListener("DOMContentLoaded", function () {
     
 
     /**
-     * LIMITE
+     * LIMITANDO DADOS
+     * .limit(numero) - retorna apenas o numero de resultados que foi passado no método
      */
+    /*
     firebase.firestore().collection('cards').limit(3).get().then(snapshot => {
         snapshot.docs.forEach(card => {
             adicionaCardATela(card.data(), card.id)
         });
     });
+    */
+
+    /**
+     * CURSORES/FILTROS
+     * .startAt(valor): Começa a filtrar no valor passado. Funciona como o operador >=
+     * .startAfter(valor): Começa a filtrar no valor passado. Funciona como o operador >
+     * .startBefore(valor): Começa a filtrar no valor passado, fncionando como o operador <
+     * .endAt(valor): Começa a filtrar no valor passado, funcionando como o operador <=
+     * 
+     * Obs.: Esses métodos de filtro aceitam também, além do valor, um documento
+     */
+    /*
+    firebase.firestore().collection('cards').orderBy('idade').startAfter(25).endAt(40).get().then(snapshot => {
+        snapshot.docs.forEach(card => {
+            adicionaCardATela(card.data(), card.id);
+        });
+    });
+    */
+    var startAt;
+    firebase.firestore().collection('cards').limit(3).get().then(snap => { //pega os 3 primeiros elementos
+        startAt = snap.docs[snap.docs.length - 1]; //pega o ultimo elemento dos 3
+        firebase.firestore().collection('cards').startAt(startAt).get().then(snapshot => {
+            snapshot.docs.forEach(card => {
+                adicionaCardATela(card.data(), card.id);
+            });
+        });
+    });
+
 
 });
 
