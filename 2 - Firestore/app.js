@@ -193,13 +193,23 @@ document.addEventListener("DOMContentLoaded", function () {
      * (tipo não é obrigatorio)
      * Obs.: Ao usar juntamente do .where() deve se ordenar pelo mesmo atributo
      */
+    /*
     firebase.firestore().collection('cards').where('curtidas', '>', 0).orderBy('curtidas', 'desc').get().then(snapshot => {
         snapshot.docs.forEach(card => {
             adicionaCardATela(card.data(), card.id);
         });
     });
+    */
     
 
+    /**
+     * LIMITE
+     */
+    firebase.firestore().collection('cards').limit(3).get().then(snapshot => {
+        snapshot.docs.forEach(card => {
+            adicionaCardATela(card.data(), card.id)
+        });
+    });
 
 });
 
