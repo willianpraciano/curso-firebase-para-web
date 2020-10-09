@@ -179,8 +179,22 @@ document.addEventListener("DOMContentLoaded", function () {
      * .WHERE('campo', 'operador', 'valor') - Retorna dados que obedecem a condição passada
      * Obs.: Não aceita ||(OR), &&(AND) e !=(Diferente)
      */
+    /*
     firebase.firestore().collection('cards').where('idade', '>', 25).get().then(snapshot => {
         snapshot.docs.forEach(card =>{
+            adicionaCardATela(card.data(), card.id);
+        });
+    });
+    */
+
+    /**
+     * ORDENAÇÃO
+     * .orderBy('campo', 'ordenacao') - ordena pelo campo e pelo tipo de ordenacao passados
+     * (tipo não é obrigatorio)
+     * Obs.: Ao usar juntamente do .where() deve se ordenar pelo mesmo atributo
+     */
+    firebase.firestore().collection('cards').where('curtidas', '>', 0).orderBy('curtidas', 'desc').get().then(snapshot => {
+        snapshot.docs.forEach(card => {
             adicionaCardATela(card.data(), card.id);
         });
     });
