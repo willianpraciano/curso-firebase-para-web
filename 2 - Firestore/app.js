@@ -53,7 +53,18 @@ function deletar(id) {
  * @param {String} id Id do card
  */
 function curtir(id) {
-    
+    var card = document.getElementById(id);
+    var count = card.getElementsByClassName('count-number')[0];
+    var countNumber = +count.innerText; //converte para Number
+    countNumber = countNumber + 1;
+
+    /**
+     * .update({dados}): Atualiza todos os dados passados no parametro. 
+     * Obs.: Pode ser usado apenas em docs 
+     */ 
+    firebase.firestore().collection('cards').doc(id).update({curtidas: countNumber}).then(()=>{
+        count.innerText = countNumber;
+    });
 };
 
 /**
@@ -61,7 +72,19 @@ function curtir(id) {
  * @param {String} id Id do card
  */
 function descurtir(id) {
-    
+    var card = document.getElementById(id);
+    var count = card.getElementsByClassName('count-number')[0];
+    var countNumber = +count.innerText; //converte para Number
+    if(countNumber > 0){
+        countNumber = countNumber - 1;
+    }
+    /**
+     * .update({dados}): Atualiza todos os dados passados no parametro. 
+     * Obs.: Pode ser usado apenas em docs 
+     */ 
+    firebase.firestore().collection('cards').doc(id).update({curtidas: countNumber}).then(()=>{
+        count.innerText = countNumber;
+    });
 };
 
 /**
