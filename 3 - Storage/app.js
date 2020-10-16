@@ -63,12 +63,37 @@ fileInput.onchange = function (event) {
     //Atribui a tarefa de upload à variável e executa essa tarefa ao executar o .put()
     tarefaDeUpload = ref.child(uid).put(arquivo);
 
+    /**
+     * .on('state_changed, observavel_upload(), error(), completou() );
+     */
+    tarefaDeUpload.on('state_changed', upload =>{
+      console.log('Mudou o estado', upload);
+
+      //.state retorna o estado do upload, pode ser 'running', 'paused' ou 'sucess'
+      if(upload.state == 'running'){
+        //.bytesTransfered são os bytes transferidos até o momento
+        //.totalBytes são os bytes
+        var progresso = Math.round((upload.bytesTransferred/upload.totalBytes)*100);
+        console.log(`${progresso}%`);
+      }
+
+    }, error =>{
+      console.log('Ocorreu um erro', error);
+    }, () => {
+      console.log('Completou a tarefa');
+      ref.child(uid).getDownloadURL().then(url => {
+        console.log(url);
+      });
+    });
+
+    /*
     tarefaDeUpload.then(snapshot => {
       console.log('Snapshot: ', snapshot);
     }).catch(error => {
       //Pega o erro, que no caso é gerado pelo cancelamento da tarefa
       console.log('Error: ', error);
     });
+    */
 
 
 }
