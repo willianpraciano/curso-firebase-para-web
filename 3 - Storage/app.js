@@ -132,6 +132,15 @@ stringInput.onchange = function (event) {
 
 }
 
+//deleta um arquivo
+function deletar(){
+  ref.child('-MJl-ZnBqIV7-amKpMoA').delete().then(()=>{
+    console.log('Deletou com sucesso!');
+  }).catch(error => {
+    console.log('Erro: ', error);
+  });
+}
+
 //pausa a tarefa de upload  
 pausar = function() {
   tarefaDeUpload.pause();
