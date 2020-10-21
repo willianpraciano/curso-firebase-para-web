@@ -23,3 +23,22 @@ admin.initializeApp({
      response.status(500).send(error);
    });
  });
+
+ /**
+  * É possível criar observaveis em certos ecentos do banco e em rotas
+  * utilizando alguns métodos:
+  * .onCreate - ao criar um novo dado no nó
+  * .onUpdate - ao atualizar um dado em um nó
+  * .onDelete - ao excluir um dado em um nó
+  * .onWrite - ao executar qualquer uma das funções anteriores
+  */
+
+  exports.updateCount = functions.database.ref('/card/{pushId}').onCreate((snapshot, context)=>{
+    // .onCreate((snapshot, context)): snapshot é o dado atual / contexto é da chamada
+    admin.database().ref('card').once('value').then(snap =>{
+      admin.database().ref('contagem').set(snap.numChildren()).then(()=>{
+        //é preciso retornar um dado ou uma promessa
+        return snap.numChildren();
+      });
+    });
+  });
