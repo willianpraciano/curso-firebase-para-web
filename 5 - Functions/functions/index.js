@@ -25,7 +25,7 @@ admin.initializeApp({
  });
 
  /**
-  * É possível criar observaveis em certos ecentos do banco e em rotas
+  * É possível criar observaveis em certos ecentos do banco e em rotas no Realtime Database
   * utilizando alguns métodos:
   * .onCreate - ao criar um novo dado no nó
   * .onUpdate - ao atualizar um dado em um nó
@@ -42,3 +42,18 @@ admin.initializeApp({
       });
     });
   });
+
+
+/**
+ * Passando o nome de usuário para MAIUSCULO nos documentos do Firestore
+ */
+
+ exports.updateName = functions.firestore.document('/cards/{userId}').onCreate((snapshot, context) => {
+   let nome = snapshot.data().nome;
+   nome = nome.toUpperCase();
+
+   admin.firestore().collection('cards').doc(snapshot.id).update({nome}).then(()=>{
+     return nome;
+     
+   });
+ });

@@ -21,6 +21,11 @@ function criarCard() {
         curtidas: 0,
     };
 
+    firebase.firestore().collection('cards').add(card).then(()=>{
+        console.log('Dados salvos');
+        adicionaCardATela(card);
+    });
+
     fetch('https://us-central1-cursofirebase-73142.cloudfunctions.net/addCard',{
         body: JSON.stringify(card),
         method: 'POST',
@@ -86,9 +91,48 @@ function descurtir(id) {
  * Espera o evento de que a DOM está pronta para executar algo
  */
 document.addEventListener("DOMContentLoaded", function () {
+    /*
     ref.on('child_added', snapshot => {
         console.log('child_added', snapshot.key);
         adicionaCardATela(snapshot.val(), snapshot.key);
+    });
+    */
+
+   firebase.firestore().collection('cards').get().then(snapshot => {
+        
+        /**
+         * snapshot.docs() - Acessa os Elementos dentro da coleção e retorna um 
+         * objeto e deve se utilizar um forEach
+         * 
+         * snapshot.empty - É uma propriedade que retorna um booleano se o
+         * snapshot estiver vazio
+         *
+         * snapshot.metadata - São os metadados da coleção
+         *
+         * snapshot.query - Retorna a query utilizada no filtro desse .get()
+         *
+         * snapshot.size - Retorna o número de documentos dentro dessa coleção
+         *
+         * snapshot.docCheges - Retorna um array com as mudanças que essa coleção
+         * sofreu desde a ultima leitura
+         */
+            
+        //console.log(snapshot);
+        
+        snapshot.docs.forEach(card => {
+            /**
+             * card.data() - Retorna os dados do meu documento
+             *
+             * card.id - retorna o UID do meu documento
+             *
+             * card.isEqual(card) - Booleano que retorna TRUE se o documento 
+             * passado for igual ao documento utilizado. A chave e o ID ele NÃO 
+             * compara. Serve para docs e collections
+             */
+
+            //console.log(card);
+            adicionaCardATela(card.data(), card.id);
+        });
     });
 });
 
