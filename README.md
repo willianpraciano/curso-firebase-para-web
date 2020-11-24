@@ -20,8 +20,8 @@
 
 <p align="center">
   <a href="#sobre-o-repositório">Sobre o Repositório</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#trabalho-1">Trabalho 1</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#trabalho-2">Trabalho 2</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#sobre-o-curso">Sobre o curso</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#sobre-o-professor">Sobre o Prfessor</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#meta">Meta</a>
 </p>
 
