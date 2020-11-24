@@ -2,16 +2,16 @@
   Firebase para Web e Apps hibridos 
 </h1>
 <p align="center">
-  <img alt="GitHub language count" src="https://github.com/willianpraciano/curso-firebase-para-web">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/willianpraciano/curso-firebase-para-web">
 
-  <img alt="Repository size" src="https://github.com/willianpraciano/curso-firebase-para-web">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/willianpraciano/curso-firebase-para-web">
   
   <a href="https://github.com/willianpraciano/curso-firebase-para-web/commits/master">
-    <img alt="GitHub last commit" src="https://github.com/willianpraciano/curso-firebase-para-web">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/willianpraciano/curso-firebase-para-web">
   </a>
 
   <a href="https://github.com/willianpraciano/curso-firebase-para-web/issues">
-    <img alt="Repository issues" src="https://github.com/willianpraciano/curso-firebase-para-web">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/willianpraciano/curso-firebase-para-web">
   </a>
 
   <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
